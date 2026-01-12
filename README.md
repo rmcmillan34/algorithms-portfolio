@@ -1,3 +1,9 @@
+![Build PDF](https://github.com/rmcmillan34/algorithms-portfolio/actions/workflows/build-pdf.yml/badge.svg)
+![C++](https://img.shields.io/badge/C%2B%2B-primary-blue)
+![LaTeX](https://img.shields.io/badge/LaTeX-Portfolio-lightgrey)
+![Version](https://img.shields.io/badge/version-v0.1-informational)
+
+
 # Algorithms Portfolio
 
 A curated computer science algorithms portfolio demonstrating:
