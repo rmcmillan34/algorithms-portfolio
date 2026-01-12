@@ -1,0 +1,31 @@
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  urlcolor=blue
+}
+
+\lstdefinestyle{cpp}{
+  language=C++,
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  columns=fullflexible,
+  showstringspaces=false
+}
+
+\newcommand{\ProblemTitle}[1]{\subsection{#1}}
+\newcommand{\ProblemSummary}{\paragraph{Problem.}}
+\newcommand{\KeyIdea}{\paragraph{Key idea.}}
+\newcommand{\Algorithm}{\paragraph{Algorithm.}}
+\newcommand{\Correctness}{\paragraph{Correctness sketch.}}
+\newcommand{\Complexity}{\paragraph{Complexity.}}
