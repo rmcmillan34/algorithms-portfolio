@@ -9,6 +9,11 @@
 \usepackage{xcolor}
 \usepackage{fancyhdr}
 
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{codekeyword}{RGB}{0,0,150}
+\definecolor{codecomment}{RGB}{0,128,0}
+\definecolor{codestring}{RGB}{163,21,21}
+
 \hypersetup{
   colorlinks=true,
   linkcolor=blue,
@@ -17,11 +22,23 @@
 
 \lstdefinestyle{cpp}{
   language=C++,
+  backgroundcolor=\color{codebg},
   basicstyle=\ttfamily\small,
-  breaklines=true,
+  keywordstyle=\color{codekeyword}\bfseries,
+  commentstyle=\color{codecomment}\itshape,
+  stringstyle=\color{codestring},
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  stepnumber=1,
+  numbersep=8pt,
   frame=single,
+  framerule=0.5pt,
+  breaklines=true,
+  breakatwhitespace=true,
   columns=fullflexible,
-  showstringspaces=false
+  showstringspaces=false,
+  tabsize=2,
+  captionpos=b
 }
 
 \newcommand{\ProblemTitle}[1]{\subsection{#1}}
@@ -35,4 +52,4 @@
 \fancyhf{}
 
 \fancyhead[C]{Algorithms Portfolio}
-\fancyfoot[C]{Ryan McMillan - v0.1 \quad | \quad \thepage}
+\fancyfoot[C]{Ryan McMillan \thepage | \quad v0.1}
