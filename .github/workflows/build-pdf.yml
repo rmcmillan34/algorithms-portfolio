@@ -16,17 +16,72 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build LaTeX (latexmk)
+        id: latex
+        continue-on-error: true
         uses: xu-cheng/latex-action@v3
         with:
           working_directory: latex
           root_file: main.tex
+          # Optional: make logs more verbose/consistent
+          args: -interaction=nonstopmode -file-line-error -halt-on-error -recorder
+
+      - name: Print first LaTeX errors (console)
+        if: always()
+        run: |
+          echo "==== First LaTeX errors ===="
+          grep -n "!" latex/main.log | head -n 80 || true
+          echo
+          echo "==== File scan / runaway argument hints ===="
+          grep -n "File ended while scanning\|Runaway argument\|Emergency stop" latex/main.log | head -n 80 || true
+          echo
+          echo "==== Missing file hints ===="
+          grep -n "I can't find file\|LaTeX Error: File" latex/main.log | head -n 80 || true
+
+      - name: Upload LaTeX logs (artifact)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: latex-logs
+          path: |
+            latex/main.log
+            latex/main.fls
+            latex/main.aux
+            latex/main.out
+            latex/main.toc
+            latex/main.tex
+            latex/preamble.tex
+            latex/titlepage.tex
+            latex/license.tex
+            latex/sections/**/*
+          if-no-files-found: warn
+
+      # Optional but useful while stabilizing: upload the whole latex dir
+      # - name: Upload full LaTeX directory (artifact)
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: latex-full
+      #     path: latex
+      #     if-no-files-found: warn
 
       - name: Move PDF to repo root
+        if: always()
         run: |
-          cp latex/main.pdf Algorithms-Portfolio.pdf
+          if [ -f latex/main.pdf ]; then
+            cp latex/main.pdf Algorithms-Portfolio.pdf
+          else
+            echo "latex/main.pdf not found (build likely failed)."
+          fi
 
       - name: Commit PDF to repo (if changed)
+        if: always()
         run: |
+          # Only commit if the PDF exists
+          if [ ! -f Algorithms-Portfolio.pdf ]; then
+            echo "No PDF to commit."
+            exit 0
+          fi
+
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
@@ -37,3 +92,8 @@ jobs:
             git commit -m "Update portfolio PDF [skip ci]"
             git push
           fi
+
+      # Re-fail CI if LaTeX build did not produce a PDF
+      - name: Fail workflow if PDF not produced
+        run: |
+          test -f latex/main.pdf
