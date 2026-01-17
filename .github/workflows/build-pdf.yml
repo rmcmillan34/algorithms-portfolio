@@ -18,20 +18,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Build with a deterministic latexmk -pdf pipeline
-      - name: Build PDF (latexmk -pdf)
-        id: build_pdf
+      - name: Build LaTeX (latexmk via latex-action)
+        id: latex
         continue-on-error: true
-        run: |
-          set -euxo pipefail
-          cd latex
-          # Clean old aux files (optional but reduces weirdness)
-          latexmk -C || true
-          # Force PDF mode, verbose errors
-          latexmk -pdf -interaction=nonstopmode -file-line-error -halt-on-error -recorder main.tex
+        uses: xu-cheng/latex-action@v3
+        with:
+          working_directory: latex
+          root_file: main.tex
+          # Force PDF mode and good error output
+          args: -pdf -interaction=nonstopmode -file-line-error -halt-on-error -recorder
 
-      # Print useful error context into the Actions console
-      - name: Print first LaTeX errors
+      - name: Print first LaTeX errors (console)
         if: always()
         run: |
           echo "==== First LaTeX errors (if any) ===="
@@ -44,8 +41,7 @@ jobs:
             echo "latex/main.log not found."
           fi
 
-      # Always upload logs for debugging
-      - name: Upload LaTeX logs
+      - name: Upload LaTeX logs (artifact)
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -63,18 +59,15 @@ jobs:
             latex/sections/**/*
           if-no-files-found: warn
 
-      # Copy the built PDF (if it exists) to repo root
       - name: Copy PDF to repo root
         if: always()
         run: |
           if [ -f latex/main.pdf ]; then
             cp latex/main.pdf Algorithms-Portfolio.pdf
-            echo "PDF copied to Algorithms-Portfolio.pdf"
           else
             echo "latex/main.pdf not found (build likely failed)."
           fi
 
-      # Commit PDF only on pushes to main (NOT on PRs)
       - name: Commit PDF to repo (if changed)
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
@@ -86,7 +79,6 @@ jobs:
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
-          # If unchanged, skip commit
           if git diff --quiet -- Algorithms-Portfolio.pdf; then
             echo "PDF unchanged — no commit needed."
             exit 0
@@ -96,7 +88,6 @@ jobs:
           git commit -m "Update portfolio PDF [skip ci]"
           git push
 
-      # Make the workflow fail if the PDF wasn't produced
-      - name: Fail if PDF not produced
+      - name: Fail workflow if PDF not produced
         run: |
           test -f latex/main.pdf
