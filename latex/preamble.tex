@@ -74,6 +74,11 @@
   \end{lstlisting}
 }
 
+\newcommand{\InputCodeBlock}[3][]{%
+  \Needspace{#2\baselineskip}%
+  \lstinputlisting[#1]{#3}%
+}
+
 % --- Hyperlinks (load late-ish) ---
 \usepackage{hyperref}
 \hypersetup{
