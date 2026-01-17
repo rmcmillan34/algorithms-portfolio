@@ -67,12 +67,12 @@
 % --- Prevent code blocks splitting across pages ---
 % Use CodeBlock to guarantee "start on new page if it won't fit".
 % #2 is an estimated line count (baselines).
-\newenvironment{CodeBlock}[2][]{
-  \Needspace{#2\baselineskip}
-  \begin{lstlisting}[#1]
-}{
-  \end{lstlisting}
-}
+\lstnewenvironment{CodeBlock}[2][]%
+{%
+  \Needspace{#2\baselineskip}%
+  \lstset{#1}%
+}%
+{}
 
 \newcommand{\InputCodeBlock}[3][]{%
   \Needspace{#2\baselineskip}%
