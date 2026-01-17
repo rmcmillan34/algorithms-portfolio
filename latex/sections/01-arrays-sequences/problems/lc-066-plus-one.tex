@@ -1,0 +1,68 @@
+% STATUS: draft
+% PROMOTE: exemplars
+% TAGS: arrays, math
+% DIFFICULTY: easy
+% SOURCE: LeetCode 66
+
+\ProblemTitle{Plus One}
+\ProblemMeta{Easy}{Arrays, Simulation}{LC-066}
+\label{prob:lc-066-plus-one}
+
+\ProblemSummary
+Given a non-empty array of digits representing a non-negative integer, increment
+the integer by one and return the resulting array of digits.
+
+The most significant digit is stored at the beginning of the array, and each
+digit is in the range \([0,9]\).
+
+\KeyIdea
+Incrementing the number requires simulating elementary addition from right to
+left. Carry propagation only affects trailing digits equal to nine; once a
+digit strictly less than nine is incremented, the process terminates.
+
+\begin{Thinking}
+My initial instinct was to convert the digit array into an integer, add one, and
+convert it back. This approach fails due to potential overflow and violates the
+problem constraints.
+
+What simplified the reasoning was treating the operation as grade-school
+addition and maintaining the invariant that all digits to the right of the
+current index are already correct after carry handling.
+\end{Thinking}
+
+\Algorithm
+\begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{12}
+for i from n - 1 downto 0:
+    if digits[i] < 9:
+        digits[i] = digits[i] + 1
+        return digits
+    digits[i] = 0
+
+prepend 1 to digits
+return digits
+\end{CodeBlock}
+
+\Correctness
+We iterate from the least significant digit toward the most significant digit.
+At each iteration, the invariant maintained is that all digits to the right of
+the current index represent the correct result after increment and carry
+propagation.
+
+If a digit less than nine is encountered, incrementing it produces the correct
+result and no further carry is required. If all digits are nine, each is set to
+zero and a leading one is prepended, yielding the correct incremented number.
+Thus, the algorithm always returns the correct result.
+
+\Complexity
+The algorithm runs in \(O(n)\) time, where \(n\) is the number of digits. It uses
+\(O(1)\) additional space beyond the output array.
+
+\begin{CodeBlock}[style=cpp,caption={C++ Implementation}]{18}
+\lstinputlisting{../../../../problems/01-arrays_sequences/plus_one/solution.cpp}
+\end{CodeBlock}
+
+\begin{CodeBlock}[style=python,caption={Python Implementation}]{16}
+\lstinputlisting{../../../../problems/01-arrays_sequences/plus_one/solution.py}
+\end{CodeBlock}
+
+\ProblemDivider

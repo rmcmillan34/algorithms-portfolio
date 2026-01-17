@@ -1,0 +1,29 @@
+\section{Arrays \& Sequences}
+
+Arrays are the foundational data structure in most algorithmic problems.
+They provide constant-time indexed access and strong cache locality, but
+require careful reasoning about indices, bounds, and in-place mutation.
+
+This chapter focuses on recognizing array-based problem patterns and
+maintaining clear invariants over contiguous memory.
+
+\subsection{Core Ideas}
+\begin{itemize}[nosep]
+  \item Index-as-state reasoning
+  \item In-place mutation vs auxiliary storage
+  \item Prefix and suffix accumulation
+  \item Simulation of elementary operations (e.g.\ addition, carry propagation)
+\end{itemize}
+
+\subsection{Common Pitfalls}
+\begin{itemize}[nosep]
+  \item Off-by-one errors at boundaries
+  \item Unintended data overwrites during in-place updates
+  \item Assuming sorting or uniqueness without verifying constraints
+  \item Over-allocating space when a single pass suffices
+\end{itemize}
+
+% Difficulty-curated examples
+\input{sections/01-arrays_sequences/easy}
+\input{sections/01-arrays_sequences/medium}
+\input{sections/01-arrays_sequences/hard}
