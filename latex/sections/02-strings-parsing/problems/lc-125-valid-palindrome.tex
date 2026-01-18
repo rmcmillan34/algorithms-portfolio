@@ -1,0 +1,95 @@
+% =============================================================================
+% Problem Template
+% =============================================================================
+% Copy this file into:
+%   latex/sections/<domain>/problems/lc-XXX-problem-name.tex
+%
+% Fill in the metadata below and remove any sections not required.
+% =============================================================================
+
+% STATUS: draft
+% PROMOTE: exemplars
+% TAGS: strings, two pointers
+% DIFFICULTY: easy
+% SOURCE: LeetCode 125
+
+\ProblemTitle{Valid Palindrome}
+\problemMeta{Easy}{Strings, Two Pointers}{LC-125}
+\label{prob:lc-125-valid-palindrome}
+
+\ProblemSummary
+Given a string $s$, determine whether it is a palindrome when considering only alphanumeric characters and ignoring case.
+Non-alphanumeric characters (punctuation/whitespace) are ignored. After filtering, the empty string is considered a palindrome.
+
+\KeyIdea
+We need to compare the string from both ends; a two-pointer approach lets us scan inward while skipping non-alphanumeric characters, achieving $O(n)$ time and $O(1)$ extra space.
+
+% -----------------------------------------------------------------------------
+% Optional: Author Thinking (excluded from exemplar builds)
+% -----------------------------------------------------------------------------
+\begin{Thinking}
+<Informal reasoning, failed approaches, intuition-building, or mental models.
+This section is intentionally exploratory and may be omitted in promoted or
+exemplar versions of the book.>
+\end{Thinking}
+
+% -----------------------------------------------------------------------------
+% Algorithm
+% -----------------------------------------------------------------------------
+\Algorithm
+\begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{<line count>}
+    initialise left = 0, right = length(s) - 1
+    while left < right:
+        if s[left] is not alphanumeric:
+            left = left + 1
+            continue
+        if s[right] is not alphanumeric:
+            right = right - 1
+            continue
+        compare lowercase(s[left]) not equal to lowercase(s[right]):
+            return false
+        left = left + 1
+        right = right - 1
+    return true
+\end{CodeBlock}
+
+% -----------------------------------------------------------------------------
+% Correctness
+% -----------------------------------------------------------------------------
+\Correctness
+At the start of each iteration, all alphanumeric characters strictly outside the interval $[l, r]$ have already been matched (case-insensitively) with their corresponding partner on the other side.
+Skipping a non-alphanumeric character is safe because such characters are ignored by the problem definition.
+If $\text{lower}(s[l]) \neq \text{lower}(s[r])$, then an unmatched pair exists, so the string cannot be a valid palindrome and we return \texttt{False}.
+When the loop terminates ($l \ge r$), every relevant pair has been verified; a middle character (odd length after filtering) does not affect palindromicity.
+
+% -----------------------------------------------------------------------------
+% Complexity
+% -----------------------------------------------------------------------------
+\Complexity
+Each pointer moves inward at most $n$ times, so time complexity is $O(n)$.
+The algorithm uses $O(1)$ extra space (in-place scanning; no filtered string constructed).
+
+% -----------------------------------------------------------------------------
+% Implementation
+% -----------------------------------------------------------------------------
+%\bigskip
+%\noindent\textbf{C++ Implementation}
+
+%\lstinputlisting[
+%  style=cpp,
+%  caption={C++ Solution: <Problem Title>}
+%]{/../problems/<domain>/<difficulty>/lc-XXX-problem-name/solution.cpp}
+
+\bigskip
+\noindent\textbf{Python Implementation}
+
+\lstinputlisting[
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  caption={Python Solution: <Problem Title>}
+]{../problems/<domain>/<difficulty>/lc-XXX-problem-name/solution.py}
+
+\ProblemDivider

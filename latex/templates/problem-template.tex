@@ -1,0 +1,84 @@
+% =============================================================================
+% Problem Template
+% =============================================================================
+% Copy this file into:
+%   latex/sections/<domain>/problems/lc-XXX-problem-name.tex
+%
+% Fill in the metadata below and remove any sections not required.
+% =============================================================================
+
+% STATUS: draft | reviewed | final
+% PROMOTE: none | exemplars | quant-prep
+% TAGS: arrays, hashing, dp, graphs, etc.
+% DIFFICULTY: easy | medium | hard
+% SOURCE: LeetCode XXX | Custom | Other
+
+\ProblemTitle{<Problem Title>}
+\label{prob:<domain>-<short-name>}
+
+\ProblemSummary
+<Concise problem statement in your own words. Focus on what is being computed,
+not how. Avoid examples unless necessary for clarity.>
+
+\KeyIdea
+<One paragraph explaining the core insight or invariant that makes the problem
+tractable. This should read like the “aha” moment, not a step-by-step solution.>
+
+% -----------------------------------------------------------------------------
+% Optional: Author Thinking (excluded from exemplar builds)
+% -----------------------------------------------------------------------------
+\begin{Thinking}
+<Informal reasoning, failed approaches, intuition-building, or mental models.
+This section is intentionally exploratory and may be omitted in promoted or
+exemplar versions of the book.>
+\end{Thinking}
+
+% -----------------------------------------------------------------------------
+% Algorithm
+% -----------------------------------------------------------------------------
+\Algorithm
+\begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{<line count>}
+<Write clear, language-agnostic pseudocode here.
+Use indentation to reflect control flow.
+Avoid implementation-specific details.>
+\end{CodeBlock}
+
+% -----------------------------------------------------------------------------
+% Correctness
+% -----------------------------------------------------------------------------
+\Correctness
+<Explain why the algorithm is correct.
+Reference invariants, loop structure, or structural induction as appropriate.
+This should read like a proof sketch, not a narrative description.>
+
+% -----------------------------------------------------------------------------
+% Complexity
+% -----------------------------------------------------------------------------
+\Complexity
+<State time and space complexity using asymptotic notation.
+Be explicit about what n represents.>
+
+% -----------------------------------------------------------------------------
+% Implementation
+% -----------------------------------------------------------------------------
+\bigskip
+\noindent\textbf{C++ Implementation}
+
+\lstinputlisting[
+  style=cpp,
+  caption={C++ Solution: <Problem Title>}
+]{../../../../problems/<domain>/<difficulty>/lc-XXX-problem-name/solution.cpp}
+
+\bigskip
+\noindent\textbf{Python Implementation}
+
+\lstinputlisting[
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  caption={Python Solution: <Problem Title>}
+]{../../../../problems/<domain>/<difficulty>/lc-XXX-problem-name/solution.py}
+
+\ProblemDivider
