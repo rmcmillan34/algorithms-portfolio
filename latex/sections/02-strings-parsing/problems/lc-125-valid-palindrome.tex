@@ -14,7 +14,7 @@
 % SOURCE: LeetCode 125
 
 \ProblemTitle{Valid Palindrome}
-\problemMeta{Easy}{Strings, Two Pointers}{LC-125}
+\ProblemMeta{Easy}{Strings, Two Pointers}{LC-125}
 \label{prob:lc-125-valid-palindrome}
 
 \ProblemSummary
@@ -46,7 +46,7 @@ exemplar versions of the book.>
         if s[right] is not alphanumeric:
             right = right - 1
             continue
-        compare lowercase(s[left]) not equal to lowercase(s[right]):
+        if lowercase(s[left]) != lowercase(s[right]):
             return false
         left = left + 1
         right = right - 1
@@ -57,10 +57,10 @@ exemplar versions of the book.>
 % Correctness
 % -----------------------------------------------------------------------------
 \Correctness
-At the start of each iteration, all alphanumeric characters strictly outside the interval $[l, r]$ have already been matched (case-insensitively) with their corresponding partner on the other side.
+At the start of each iteration, all alphanumeric characters strictly outside the interval $[left, right]$ have already been matched (case-insensitively) with their corresponding partner on the other side.
 Skipping a non-alphanumeric character is safe because such characters are ignored by the problem definition.
-If $\text{lower}(s[l]) \neq \text{lower}(s[r])$, then an unmatched pair exists, so the string cannot be a valid palindrome and we return \texttt{False}.
-When the loop terminates ($l \ge r$), every relevant pair has been verified; a middle character (odd length after filtering) does not affect palindromicity.
+If $\text{lower}(s[left]) \neq \text{lower}(s[right])$, then an unmatched pair exists, so the string cannot be a valid palindrome and we return \texttt{False}.
+When the loop terminates ($left \ge right$), every relevant pair has been verified; a middle character (odd length after filtering) does not affect palindromicity.
 
 % -----------------------------------------------------------------------------
 % Complexity
