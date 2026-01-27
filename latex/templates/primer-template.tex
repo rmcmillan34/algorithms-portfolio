@@ -1,0 +1,82 @@
+% =============================================================================
+% Primer Template (Conceptual, Non-Problem Content)
+% =============================================================================
+% Usage:
+% - Copy into: latex/sections/<domain>/primer.tex (or a more specific name)
+% - Keep code in external files under: problems/<domain>/snippets/<slug>/
+% - From primer.tex, reference code with paths like:
+%     ../../../problems/<domain>/snippets/<slug>/solution.cpp
+%     ../../../problems/<domain>/snippets/<slug>/solution.py
+% - Keep this focused on recognition, invariants, core ops, complexity, pitfalls
+.
+% =============================================================================
+
+% Replace <Topic> with the data structure / concept name
+\subsection{Primer — <Topic>}
+
+\paragraph{What It Is}
+% Concisely describe the structure/concept, its representation, and when it is u
+sed.
+% Emphasise the mental model (e.g., nodes + pointers; contiguous array + indices
+).
+
+\paragraph{Recognition Patterns}
+% How to identify that this structure is implied by a question. Provide 3–6 cues
+.
+\begin{itemize}[nosep]
+  \item <Cue 1>
+  \item <Cue 2>
+  \item <Cue 3>
+\end{itemize}
+
+\paragraph{Core Operations}
+% Briefly define the main operations and their expected complexity.
+% Include short pseudocode blocks when clarity benefits.
+\begin{CodeBlock}[style=pseudo,caption={<Topic>: Core Operations (pseudocode)}]{
+18}
+<op1>(...):
+  <pseudocode>
+
+<op2>(...):
+  <pseudocode>
+\end{CodeBlock}
+
+\paragraph{Invariants \& Correctness}
+% State the key invariants maintained (e.g., head/tail consistency, ordering, sh
+ape).
+% Sketch why the core operations preserve these invariants.
+
+\paragraph{Complexity}
+% Summarise asymptotic time/space for each core operation.
+\begin{itemize}[nosep]
+  \item <op1>: time $O(\cdot)$, space $O(\cdot)$
+  \item <op2>: time $O(\cdot)$, space $O(\cdot)$
+\end{itemize}
+
+\paragraph{Common Pitfalls}
+% Practical footguns and frequent mistakes.
+\begin{itemize}[nosep]
+  \item <Pitfall 1>
+  \item <Pitfall 2>
+  \item <Pitfall 3>
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+% Example Implementations (external files; adjust paths for your primer location
+)
+% -----------------------------------------------------------------------------
+% From latex/sections/<domain>/primer.tex, use ../../../ to reach repo root.
+
+% \bigskip
+% \noindent\textbf{C++ Example}
+% \lstinputlisting[
+%   style=cpp,
+%   caption={<Topic> — Minimal C++ Example}
+% ]{../../../problems/<domain>/snippets/<slug>/solution.cpp}
+
+% \bigskip
+% \noindent\textbf{Python Example}
+% \lstinputlisting[
+%   style=python,
+%   caption={<Topic> — Minimal Python Example}
+% ]{../../../problems/<domain>/snippets/<slug>/solution.py}

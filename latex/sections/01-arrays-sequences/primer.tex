@@ -1,0 +1,127 @@
+% =============================================================================
+% Primer Template (Conceptual, Non-Problem Content)
+% =============================================================================
+% Usage:
+% - Copy into: latex/sections/<domain>/primer.tex (or a more specific name)
+% - Keep code in external files under: problems/<domain>/snippets/<slug>/
+% - From primer.tex, reference code with paths like:
+%     ../../../problems/<domain>/snippets/<slug>/solution.cpp
+%     ../../../problems/<domain>/snippets/<slug>/solution.py
+% - Keep this focused on recognition, invariants, core ops, complexity, pitfalls
+.
+% =============================================================================
+
+% Replace <Topic> with the data structure / concept name
+\subsection{Primer — Arrays & Sequences}
+
+\paragraph{What It Is}
+% Concisely describe the structure/concept, its representation, and when it is u
+sed.
+% Emphasise the mental model (e.g., nodes + pointers; contiguous array + indices
+).
+An array is a $contiguous$ block of memory storing elements of the same type, supporting $O(1)$ access by index. A dynamic array (e.g. C++ \texttt{std::vector}, Python \texttt{list}) grows by allocating a larger block and copying elements when capacity is exceeded, providing $amortized$ $O(1)$ append. A $sequence$ generalises the idea to any indexable or iterable ordered collection; here we emphasise contiguous arrays.
+
+\paragraph{Recognition Patterns}
+% How to identify that this structure is implied by a question. Provide 3–6 cues
+.
+\begin{itemize}[nosep]
+    \item Index math across contiguous elements (prefix/suffix, window, ranges).
+    \item Constraints emphasising in-place mutation, $O(1)$ extra space, single pass
+    \item Repeated accumulation or difference of segments (prefix sums/scans).
+    \item Local adjacency decisions: next/previous comparison, runs, preaks/valleys
+\end{itemize}
+
+\paragraph{Core Operations}
+% Briefly define the main operations and their expected complexity.
+% Include short pseudocode blocks when clarity benefits.
+\begin{CodeBlock}[style=pseudo,caption={<Topic>: Core Operations (pseudocode)}]{
+18}
+access(A, i):
+    return A[i] // O(1)
+
+traverse(A):
+  for i from 0 to n-1:
+    visit(A[i])
+
+insert_at(A, i, x):
+  grow A by 1
+  for j from n-1 downto i:
+    A[j+1] = A[j]
+  A[i] = x
+
+erase_at(A, i):
+  for j from i to n-2:
+    A[j] = A[j+1]
+  shrink A by 1
+
+prefix_sums(A):
+  P[0] = 0
+  for i from 0 to n-1:
+    P[i+1] = P[i] + A[i]
+  return P
+
+two_pointers_sorted(A, target): 
+  i = 0; j = n - 1
+  while i < j:
+    s = A[i] + A[j]
+    if s == target: return (i, j)
+    if s < target: i = i + 1 else: j = j - 1
+  return not found
+
+sliding_window(A):             
+  l = 0
+  for r from 0 to n-1:
+    add(A[r])         
+    while window_invalid():
+      remove(A[l])
+      l = l + 1
+    update_answer()
+\end{CodeBlock}
+
+\paragraph{Invariants \& Correctness}
+% State the key invariants maintained (e.g., head/tail consistency, ordering, sh
+ape).
+% Sketch why the core operations preserve these invariants.
+Array scans typically maintain index-based invariants:
+(i) after $i$ steps, positions $[0..i)$ have been processed,
+(ii) two-pointer: indices satisfy $0 \le i \le j < n$ and a monotone move (left increases or right decreases) prevents rework,
+(iii) sliding window: the maintained sub-array $[l,r)$ satisfies a property (e.g. distinct elements, sum $\le K$; expansion and contraction preserve the property.
+
+\paragraph{Complexity}
+% Summarise asymptotic time/space for each core operation.
+\begin{itemize}[nosep]
+  \item Access: time $O(1)$; Traversal: $O(n)$
+  \item Insert/delete at end (dynamic array): amortised $O(1)$, at index $O(n)$
+  \item Prefix sums / scan: $0(n)$ time, $O(n)$ extra space (or $0(1)$ in place if possible)
+  \item Two-pointers / sliding window: typically $O(n)$ if each pointer advances monotonically.
+\end{itemize}
+
+\paragraph{Common Pitfalls}
+% Practical footguns and frequent mistakes.
+\begin{itemize}[nosep]
+  \item Off-by-one at boundaries; confusing inclusive/exclusive ranges.
+  \item Forgetting to update all window state on both expand and shrink
+  \item Overflow in sums/producs; use wider types for accumulation.
+  \item Accidental $O(n^2)$ from repeated slicing/copying in inner loops.
+  \item Assuming sortedness/uniqueness without verifying constraints.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+% Example Implementations (external files; adjust paths for your primer location
+)
+% -----------------------------------------------------------------------------
+% From latex/sections/<domain>/primer.tex, use ../../../ to reach repo root.
+
+% \bigskip
+% \noindent\textbf{C++ Example}
+% \lstinputlisting[
+%   style=cpp,
+%   caption={<Topic> — Minimal C++ Example}
+% ]{../../../problems/<domain>/snippets/<slug>/solution.cpp}
+
+% \bigskip
+% \noindent\textbf{Python Example}
+% \lstinputlisting[
+%   style=python,
+%   caption={<Topic> — Minimal Python Example}
+% ]{../../../problems/<domain>/snippets/<slug>/solution.py}
