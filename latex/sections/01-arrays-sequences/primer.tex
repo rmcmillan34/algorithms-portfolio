@@ -12,7 +12,7 @@
 % =============================================================================
 
 % Replace <Topic> with the data structure / concept name
-\subsection{Primer — Arrays & Sequences}
+\subsection{Primer - Arrays \& Sequences}
 
 \paragraph{What It Is}
 % Concisely describe the structure/concept, its representation, and when it is u
@@ -28,14 +28,13 @@ An array is a $contiguous$ block of memory storing elements of the same type, su
     \item Index math across contiguous elements (prefix/suffix, window, ranges).
     \item Constraints emphasising in-place mutation, $O(1)$ extra space, single pass
     \item Repeated accumulation or difference of segments (prefix sums/scans).
-    \item Local adjacency decisions: next/previous comparison, runs, preaks/valleys
+    \item Local adjacency decisions: next/previous comparison, runs, peaks/valleys
 \end{itemize}
 
 \paragraph{Core Operations}
 % Briefly define the main operations and their expected complexity.
 % Include short pseudocode blocks when clarity benefits.
-\begin{CodeBlock}[style=pseudo,caption={<Topic>: Core Operations (pseudocode)}]{
-18}
+\begin{CodeBlock}[style=pseudo,caption={Arrays: Core Operations (pseudocode)}]{18}
 access(A, i):
     return A[i] // O(1)
 
@@ -79,20 +78,19 @@ sliding_window(A):
 \end{CodeBlock}
 
 \paragraph{Invariants \& Correctness}
-% State the key invariants maintained (e.g., head/tail consistency, ordering, sh
-ape).
+% State the key invariants maintained (e.g., head/tail consistency, ordering, shape).
 % Sketch why the core operations preserve these invariants.
 Array scans typically maintain index-based invariants:
 (i) after $i$ steps, positions $[0..i)$ have been processed,
 (ii) two-pointer: indices satisfy $0 \le i \le j < n$ and a monotone move (left increases or right decreases) prevents rework,
-(iii) sliding window: the maintained sub-array $[l,r)$ satisfies a property (e.g. distinct elements, sum $\le K$; expansion and contraction preserve the property.
+(iii) sliding window: the maintained sub-array $[l,r)$ satisfies a property (e.g. distinct elements, sum $\le K$); expansion and contraction preserve the property.
 
 \paragraph{Complexity}
 % Summarise asymptotic time/space for each core operation.
 \begin{itemize}[nosep]
   \item Access: time $O(1)$; Traversal: $O(n)$
   \item Insert/delete at end (dynamic array): amortised $O(1)$, at index $O(n)$
-  \item Prefix sums / scan: $0(n)$ time, $O(n)$ extra space (or $0(1)$ in place if possible)
+  \item Prefix sums / scan: $O(n)$ time, $O(n)$ extra space (or $O(1)$ in place if possible)
   \item Two-pointers / sliding window: typically $O(n)$ if each pointer advances monotonically.
 \end{itemize}
 
