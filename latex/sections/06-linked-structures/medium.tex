@@ -1,0 +1,24 @@
+\subsection{Medium}
+
+The following problems build on basic linked-structure traversal and introduce
+\textbf{stateful pointer algorithms}, where correctness depends on maintaining
+multiple interacting invariants simultaneously.
+Rather than simple scans, these problems require coordinating traversal with
+auxiliary state (such as a \textbf{carry}, window offset, or delayed reference)
+while constructing or modifying linked structures.
+
+The emphasis is on:
+\begin{itemize}[nosep]
+  \item Maintaining multiple \textbf{traversal invariants}
+  \item Coordinating pointer movement with additional state
+  \item Incremental construction using \textbf{dummy heads} and \textbf{cursors}
+  \item Correct handling of \textbf{null termination} across uneven structures
+\end{itemize}
+
+\input{sections/06-linked-structures/problems/lc-002-add-two-numbers}
+
+% Future problems:
+% \input{sections/06-linked-structures/problems/lc-XXX-merge-two-sorted-lists}
+% \input{sections/06-linked-structures/problems/lc-XXX-reverse-linked-list}
+% \input{sections/06-linked-structures/problems/lc-XXX-remove-nth-node-from-end}
+

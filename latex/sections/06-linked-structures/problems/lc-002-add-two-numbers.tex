@@ -1,0 +1,131 @@
+% =============================================================================
+% Problem Template
+% =============================================================================
+% Copy this file into:
+%   latex/sections/<domain>/problems/lc-XXX-problem-name.tex
+%
+% Fill in the metadata below and remove any sections not required.
+% =============================================================================
+
+% STATUS: draft | reviewed | final
+% PROMOTE: none | exemplars | quant-prep
+% TAGS: arrays, hashing, dp, graphs, etc.
+% DIFFICULTY: easy | medium | hard
+% SOURCE: LeetCode XXX | Custom | Other
+
+\ProblemTitle{Add Two Numbers}
+\ProblemMeta{Medium}{Linked Lists, Math, Carry Propagation}{LC-002}
+\label{prob:lc-002-add-two-numbers}
+
+\ProblemSummary
+Given two non-empty linked lists representing two non-negative integers, where
+each node stores a single digit and the digits are arranged in reverse order
+(least significant digit first), compute the sum of the two integers.
+Return the result as a new linked list in the same reverse-order format.
+
+\KeyIdea
+Because the digits are stored in reverse order, the lists can be traversed
+from least significant to most significant digit, making the problem a direct
+simulation of elementary addition. At each step, the current digits and any
+incoming \textbf{carry} determine the next output digit and updated carry.
+A \textbf{dummy head} node anchors the result list, while a moving
+\textbf{cursor} appends newly computed digits without losing access to the
+list's beginning. Traversal continues until both input lists reach
+\textbf{null termination} and no carry remains, maintaining the \textbf{invariant}
+that all previously processed digits in the result list are correct.
+
+% -----------------------------------------------------------------------------
+% Optional: Author Thinking (excluded from exemplar builds)
+% -----------------------------------------------------------------------------
+\begin{Thinking}
+A first brute-force idea is to traverse each list, reconstruct the two integers,
+add them, and then convert the sum back into a linked list. However, this
+approach is awkward in practice: the numbers may exceed native integer ranges,
+and it performs extra passes and conversions that are unnecessary.
+
+A better approach is to simulate column-wise addition directly on the linked
+lists. Since the digits are stored least-significant-first, we can traverse
+both lists once, propagate a carry, and build the result list incrementally.
+\end{Thinking}
+
+% -----------------------------------------------------------------------------
+% Algorithm
+% -----------------------------------------------------------------------------
+\Algorithm
+\begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{16}
+    dummy = new Node(0)
+    cur = dummy
+    carry = 0
+
+    while l1 != null OR l2 != null OR carry != 0:
+        x = (l1 != null) ? l1.val : 0
+        y = (l2 != null) ? l2.val : 0
+
+        total = x + y + carry
+        digit = total mod 10
+        carry = total div 10
+
+        cur.next = new Node(digit)
+        cur = cur.next
+
+        if l1 != null: l1 = l1.next
+        if l2 != null: l2 = l2.next
+
+    return dummy.next
+\end{CodeBlock}
+
+
+% -----------------------------------------------------------------------------
+% Correctness
+% -----------------------------------------------------------------------------
+\Correctness
+At the start of each iteration of the loop, the result list contains the correct
+sum of all digit positions processed so far, and the \textbf{carry} variable
+holds the correct carry-out into the next higher digit position.
+During the iteration, the algorithm adds the current digits (or zero if a list
+has reached \textbf{null termination}) together with the carry, computes the
+correct output digit, and updates the carry accordingly.
+Because each iteration advances at least one input pointer or consumes a
+remaining carry, the loop eventually terminates.
+When the loop ends, all digit positions and any final carry have been processed,
+so the resulting linked list represents the correct sum.
+
+
+% -----------------------------------------------------------------------------
+% Complexity
+% -----------------------------------------------------------------------------
+\Complexity
+Let $n$ and $m$ be the lengths of the two input linked lists.
+Each iteration processes at most one node from each list, and the loop runs for
+at most $\max(n, m) + 1$ iterations, yielding a time complexity of
+$O(\max(n, m))$.
+
+The algorithm uses $O(1)$ auxiliary space, as it maintains only a constant
+number of pointers and a carry variable.
+The output linked list requires $O(\max(n, m))$ space to store the result.
+
+
+% -----------------------------------------------------------------------------
+% Implementation
+% -----------------------------------------------------------------------------
+\bigskip
+\noindent\textbf{C++ Implementation}
+
+\lstinputlisting[
+  style=cpp,
+  caption={C++ Solution: LC-002 Add Two Numbers}
+]{../problems/06-linked-structures/medium/lc-002-add-two-numbers/solution.cpp}
+
+\bigskip
+\noindent\textbf{Python Implementation}
+
+\lstinputlisting[
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  caption={Python Solution: LC-002 Add Two Numbers
+]{../problems/06-linked-structures/medium/lc-002-add-two-numbers/solution.py}
+
+\ProblemDivider
