@@ -1,0 +1,44 @@
+\section{Linked Structures}
+
+Linked structures are **pointer-based** data structures where logical order is
+defined by explicit **references** rather than **contiguous memory** layout.
+They sacrifice constant-time indexed access in exchange for flexible
+insertion, deletion, and natural modeling of sequential processes.
+
+This chapter focuses on recognizing **pointer-driven** problem patterns and
+maintaining correct **traversal invariants** over **node-based** structures.
+
+\subsection{Core Ideas}
+\begin{itemize}[nosep]
+  \item **Pointer-as-state** reasoning
+  \item **Sequential traversal** instead of indexed access
+  \item Explicit handling of **null termination**
+  \item Incremental construction using moving **cursors** (e.g.\ **dummy head** nodes)
+\end{itemize}
+
+\subsection{Common Linked Structure Variants}
+Linked structures appear in several common forms, each with distinct
+properties and use cases:
+
+\begin{itemize}[nosep]
+  \item **Singly Linked List** — each node references the next node only
+  \item **Doubly Linked List** — each node references both next and previous nodes
+  \item **Circular Linked List** — the terminal node references an earlier node
+  \item **Sentinel-Based List** — uses a non-data **sentinel node** to simplify edge cases
+\end{itemize}
+
+\subsection{Common Pitfalls}
+\begin{itemize}[nosep]
+  \item Losing access to the **head node** during traversal or mutation
+  \item Dereferencing **null pointers**
+  \item Incorrect **loop termination conditions**
+  \item Conflating **in-place modification** with **new list construction**
+\end{itemize}
+
+\input{sections/02-linked-structures/primer}
+
+% Difficulty-curated examples
+\input{sections/02-linked-structures/easy}
+\input{sections/02-linked-structures/medium}
+\input{sections/02-linked-structures/hard}
+
