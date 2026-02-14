@@ -1,38 +1,57 @@
 \section{Linked Structures}
 
-Linked structures are **pointer-based** data structures where logical order is
-defined by explicit **references** rather than **contiguous memory** layout.
+Linked structures are \textbf{pointer-based} data structures where logical order is
+defined by explicit \textbf{references} rather than \textbf{contiguous memory} layout.
 They sacrifice constant-time indexed access in exchange for flexible
 insertion, deletion, and natural modeling of sequential processes.
 
-This chapter focuses on recognizing **pointer-driven** problem patterns and
-maintaining correct **traversal invariants** over **node-based** structures.
+This chapter focuses on recognising pointer-driven problem patterns and
+maintaining correct \textbf{traversal invariants} over \textbf{node-based} structures.
 
-\subsection{Core Ideas}
+\subsection*{Core Ideas}
 \begin{itemize}[nosep]
-  \item **Pointer-as-state** reasoning
-  \item **Sequential traversal** instead of indexed access
-  \item Explicit handling of **null termination**
-  \item Incremental construction using moving **cursors** (e.g.\ **dummy head** nodes)
+  \item \textbf{Pointer-as-state} reasoning
+  \item Sequential traversal instead of indexed access
+  \item Explicit handling of \textbf{null termination}
+  \item Incremental construction using moving \textbf{cursors} (e.g.\ \textbf{dummy head} nodes)
 \end{itemize}
 
-\subsection{Common Linked Structure Variants}
+\subsection*{Common Linked Structure Variants}
 Linked structures appear in several common forms, each with distinct
 properties and use cases:
 
 \begin{itemize}[nosep]
-  \item **Singly Linked List** — each node references the next node only
-  \item **Doubly Linked List** — each node references both next and previous nodes
-  \item **Circular Linked List** — the terminal node references an earlier node
-  \item **Sentinel-Based List** — uses a non-data **sentinel node** to simplify edge cases
+  \item \textbf{Singly Linked List} — each node references the next node only
+  \item \textbf{Doubly Linked List} — each node references both next and previous nodes
+  \item \textbf{Circular Linked List} — the terminal node references an earlier node
+  \item \textbf{Sentinel-Based List} — uses a non-data \textbf{sentinel node} to simplify edge cases
 \end{itemize}
 
-\subsection{Common Pitfalls}
+\subsection*{Common Pitfalls}
 \begin{itemize}[nosep]
   \item Losing access to the **head node** during traversal or mutation
   \item Dereferencing **null pointers**
   \item Incorrect **loop termination conditions**
   \item Conflating **in-place modification** with **new list construction**
+\end{itemize}
+
+\subsection*{Choosing Between Linked Structures \& Arrays}
+Selecting the appropriate data structure is often as important as implementing the algorithm itself. 
+Arrays and Linked Structures optimise for different access and update patterns. 
+
+\paragraph{Prefer Linked Structures When:}
+\begin{itemize}[nosep]
+    \item Order matters, but \textbf{indexing does not},
+    \item Frequent insertions happen towards the end,
+    \item Data arrives or is processed \textbf{sequentially},
+    \item The problem naturally models as poitner traversal,
+    \item The input is provided as a \textbf{node reference} rather than a collection. 
+\end{itemize}
+
+\paragraph{Key Trade Offs)
+\begin{itemize}
+    \item Linked Structured provide O(1) insertion, O(n) access
+    \item Arrays provide O(1) access, O(n) insertion
 \end{itemize}
 
 \input{sections/06-linked-structures/primer}
