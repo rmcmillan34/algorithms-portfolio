@@ -47,7 +47,29 @@ As I compute each digit, I prepend it to the result list so the final output rem
 % -----------------------------------------------------------------------------
 \Algorithm
 \begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{16}
-    TODO
+  s1, s2 = empty stacks
+
+  for node in l1:
+    push node.val onto s1
+  for node in l2:
+    push node.val onto s2
+
+  carry = 0
+  head = null
+
+  while s1 not empty OR s2 not empty OR carry != 0:
+    x = pop(s1) if s1 not empty else 0
+    y = pop(s2) if s2 not empty else 0
+
+    total = x + y + carry
+    carry = total // 10
+    digit = total % 10
+
+    // prepend digit to result
+    head = new ListNode(digit, head)
+
+  return head
+
 \end{CodeBlock}
 
 

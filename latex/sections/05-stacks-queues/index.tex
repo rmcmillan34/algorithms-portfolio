@@ -1,0 +1,40 @@
+\section{Stacks and Queues}
+Stacks and queues are fundamental abstract data types that model \textbf{sequential access patterns}. They are often implemented using arrays or linked lists, but their defining characteristic is the order in which elements are accessed and modified.
+
+Stacks follow a \textbf{Last-In-First-Out (LIFO)} order, where the most recently added element is the first to be removed. Queues follow a \textbf{First-In-First-Out (FIFO)} order, where the earliest added element is the first to be removed. These structures are essential for a wide range of algorithms, including depth-first search (DFS), breadth-first search (BFS), and various parsing techniques. 
+
+
+\subsection{Core Ideas}
+\begin{itemize}[nosep]
+  \item \textbf{Access-order invariant:} only interact with one end (stack top / queue front), which simplifies reasoning and correctness.
+  \item \textbf{Monotonic structures:} maintain increasing/decreasing order to answer "next greater/smaller" or "sliding window max/min" in linear time.
+  \item \textbf{State simulation:} use stacks/queues to simulate recursion, parsing, or reverse traversal (e.g., LC-445 uses LIFO to process from least-significant digit).
+\end{itemize}
+
+
+\subsection{Common Stack and Queue Variants}
+\begin{itemize}[nosep]
+  \item \textbf{Monotonic Stack} — Maintains increasing/decreasing values (often indices) to solve Next Greater/Smaller patterns.
+  \item \textbf{Monotonic Deque} — Maintains candidates for window max/min; front is the answer, back removes dominated elements.
+  \item \textbf{Circular Queue} — Fixed-capacity queue implemented with two pointers (common in design questions).
+  \item \textbf{Two-Stack Queue / Two-Queue Stack} — Classic ADT transformations; highlights amortized analysis.
+  \item \textbf{Deque} — Double-ended queue enabling efficient push/pop at both ends (basis for sliding window problems).
+\end{itemize}
+
+
+\subsection{Common Pitfalls}
+\begin{itemize}[nosep]
+  \item \textbf{Empty checks and order of operations:} calling \texttt{top()/front()/back()} before verifying non-empty.
+  \item \textbf{Value vs index confusion:} many patterns must store \emph{indices} (for window bounds, distance, duplicates) not values.
+  \item \textbf{Monotonic maintenance mistakes:} using the wrong inequality (>, >=) causing duplicate-handling bugs.
+  \item \textbf{Queue window eviction errors:} forgetting to evict out-of-window indices from the front (off-by-one boundaries).
+  \item \textbf{Assuming } \texttt{pop()} \textbf{returns a value:} e.g., C++ \texttt{vector::pop\_back()} / \texttt{stack::pop()} return void; read via \texttt{back()/top()} first.
+\end{itemize}
+
+\input{sections/05-stacks-queues/primer}
+
+% Difficulty-curated examples
+\input{sections/05-stacks-queues/easy}
+\input{sections/05-stacks-queues/medium}
+\input{sections/05-stacks-queues/hard}
+
