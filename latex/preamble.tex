@@ -136,7 +136,10 @@
   \noindent\textbf{Difficulty:} #1 \hfill \textbf{Tags:} #2 \hfill \textbf{ID:} #3\par\vspace{0.4em}%
 }
 
-\newcommand{\Block}[1]{\par\noindent\textbf{#1}\quad}
+\newcommand{\Block}[1]{%
+  \par\addvspace{0.7\baselineskip}%
+  \noindent\textbf{#1}\quad\ignorespaces
+}
 
 \newcommand{\ProblemSummary}{\Block{Problem.}}
 \newcommand{\KeyIdea}{\Block{Key idea.}}
