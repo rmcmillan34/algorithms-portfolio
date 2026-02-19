@@ -42,7 +42,7 @@ Writing the invariant first made the implementation obvious:
 \Algorithm
 \begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{12}
 stack = empty
-for c in s:
+fo c in s:
     if c is '(' or '[' or '{':
         push c onto stack
     else:
@@ -85,7 +85,7 @@ runtime is $O(n)$. The stack stores at most $n$ opening brackets, so the extra s
 \lstinputlisting[
   style=cpp,
   caption={C++ Solution: Valid Parentheses}
-]{../problems/stacks-queues/easy/lc-020-valid-parentheses/solution.cpp}
+]{../problems/05-stacks-queues/easy/lc-020-valid-parenthesessolution.cpp}
 
 \bigskip
 \noindent\textbf{Python Implementation}
@@ -96,7 +96,9 @@ runtime is $O(n)$. The stack stores at most $n$ opening brackets, so the extra s
   basicstyle=\ttfamily\small,
   frame=single,
   breaklines=true,
-  caption={Python Solution: Valid Parentheses}
-]{../problems/stacks-queues/easy/lc-020-valid-parentheses/solution.py}
+  caption={Python Solution: Valid Parentheses}:\While{}
+    \State 
+  \EndWhile
+]{../problems/05-stacks-queues/easy/lc-020-valid-parenthesessolution.py}
 
 \ProblemDivider
