@@ -26,7 +26,7 @@ class Solution:
             total = x + y + carry
             carry = total // 10
 
-            # Prepend to keep forward order (we're adding from least→most significant).
+            # Prepend to keep forward order (we're adding from least to most significant).
             head = ListNode(total % 10, head)
 
         return head
