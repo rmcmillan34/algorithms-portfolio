@@ -1,0 +1,102 @@
+% =============================================================================
+% LC-020 - Valid Parentheses
+% =============================================================================
+% STATUS: draft
+% PROMOTE: exemplars
+% TAGS: stacks, parsing
+% DIFFICULTY: easy
+% SOURCE: LeetCode 020
+% =============================================================================
+
+\ProblemTitle{Valid Parentheses}
+\ProblemMeta{Easy}{Stacks}{LC-020}
+\label{prob:stacks-queues-valid-parentheses}
+
+\ProblemSummary
+Given a string containing only the characters \texttt{()[]\{\}}, determine whether it is valid.
+A string is valid if every opening bracket is closed by the same type of bracket, and brackets
+are closed in the correct order.
+
+\KeyIdea
+Use a stack to represent the sequence of currently-unmatched opening brackets.
+When an opening bracket is seen, push it. When a closing bracket is seen, it must match the
+most recent unmatched opening bracket (the stack top). Any mismatch, or attempting to close
+when the stack is empty, makes the string invalid. The string is valid iff the stack is empty
+at the end.
+
+% -----------------------------------------------------------------------------
+% Optional: Author Thinking (excluded from exemplar builds)
+% -----------------------------------------------------------------------------
+\begin{Thinking}
+My first attempt jumped into coding the stack loop before writing the invariant. I was
+conceptually correct (LIFO matching), but I missed two edge cases that matter in C++:
+(1) calling \texttt{top()} on an empty stack (crash/UB), and (2) ensuring we \texttt{pop()}
+after a successful match (easy to accidentally skip with \texttt{continue}).
+Writing the invariant first made the implementation obvious:
+``stack = exactly the unmatched openers so far''.
+\end{Thinking}
+
+% -----------------------------------------------------------------------------
+% Algorithm
+% -----------------------------------------------------------------------------
+\Algorithm
+\begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{12}
+stack = empty
+for c in s:
+    if c is '(' or '[' or '{':
+        push c onto stack
+    else:
+        if stack is empty: return false
+        t = top of stack
+        if (c,t) is not one of (')','('), (']','['), ('}','{'):
+            return false
+        pop stack
+return (stack is empty)
+\end{CodeBlock}
+
+% -----------------------------------------------------------------------------
+% Correctness
+% -----------------------------------------------------------------------------
+\Correctness
+Maintain the invariant: after processing any prefix of the string, the stack contains exactly
+the opening brackets from that prefix that have not yet been matched, in the order they were
+encountered.
+When an opening bracket is read, pushing it preserves the invariant by adding a new unmatched
+opener. When a closing bracket is read, validity requires that there exists an unmatched opener
+and that the most recent unmatched opener matches the closing type; this is exactly the stack
+top. If the stack is empty or the types mismatch, the string cannot be valid, and the algorithm
+returns false. Otherwise, popping removes the matched opener and preserves the invariant.
+After the full scan, the string is valid if no unmatched openers remain, i.e., the stack is empty.
+Therefore, the algorithm returns true exactly for valid strings.
+
+% -----------------------------------------------------------------------------
+% Complexity
+% -----------------------------------------------------------------------------
+\Complexity
+Let $n$ be the length of the string. Each character is pushed and popped at most once, so the
+runtime is $O(n)$. The stack stores at most $n$ opening brackets, so the extra space is $O(n)$.
+
+% -----------------------------------------------------------------------------
+% Implementation
+% -----------------------------------------------------------------------------
+\bigskip
+\noindent\textbf{C++ Implementation}
+
+\lstinputlisting[
+  style=cpp,
+  caption={C++ Solution: Valid Parentheses}
+]{../problems/stacks-queues/easy/lc-020-valid-parentheses/solution.cpp}
+
+\bigskip
+\noindent\textbf{Python Implementation}
+
+\lstinputlisting[
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  caption={Python Solution: Valid Parentheses}
+]{../problems/stacks-queues/easy/lc-020-valid-parentheses/solution.py}
+
+\ProblemDivider
