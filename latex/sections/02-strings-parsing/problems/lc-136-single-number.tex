@@ -1,0 +1,83 @@
+% =============================================================================
+% Problem Template
+% =============================================================================
+% Copy this file into:
+%   latex/sections/<domain>/problems/lc-XXX-problem-name.tex
+%
+% Fill in the metadata below and remove any sections not required.
+% =============================================================================
+
+% STATUS: draft | reviewed | final
+% PROMOTE: none | exemplars | quant-prep
+% TAGS: arrays, bitwise-operations 
+% DIFFICULTY: easy
+% SOURCE: LeetCode 136
+
+\ProblemTitle{Single Number}
+\ProblemMeta{Easy}{Strings, Bitwise Operations}{LC-136}
+\label{prob:lc-136-single-number}
+
+\ProblemSummary
+Given a non-empty array of integers nums, every element appears twice except for one. Find that single one. You must implement a solution with a linear runtime complexity and use only constant extra space.
+
+\KeyIdea
+The key idea in the Single Number problem is that we must maintain constant extra space, so we need to utilise a method that
+will provide the solution in a single variable, and single pass. Given that we are told every element appears twice except for our answer we can use the associative and commutative properties of the exclusive or (XOR) bitwise operation to apply and reset the state of our answer variable.
+
+% -----------------------------------------------------------------------------
+% Optional: Author Thinking (excluded from exemplar builds)
+% -----------------------------------------------------------------------------
+\begin{Thinking}
+Initially, I first thought that because this was a matching problem I could create a hashmap with an integer number key, and an integer count value (number:count) and to iterate through the input and remove items once count > 1. This solution held for the time complexity, but failed the extra space complexity constraint in the problem statement. This lead me to search for a solution that could be applied inplace.
+\end{Thinking}
+
+% -----------------------------------------------------------------------------
+% Algorithm
+% -----------------------------------------------------------------------------
+\Algorithm
+\begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{10}
+  initialise answer = 0
+  
+  for num in nums:
+    answer = answer XOR num
+  
+  return answer
+\end{CodeBlock}
+
+% -----------------------------------------------------------------------------
+% Correctness
+% -----------------------------------------------------------------------------
+\Correctness
+For each element of the input array, and as we iterate over and perform the XOR operation to the answer we know that every preceding element has been checked, with the XOR mutating the answer or resetting the answer state (if the number has been seen a second time)
+At the end of the loop we can be sure that only the singular element of the input array is left as $num XOR 0 = num$ and $num XOR num = 0$.
+
+% -----------------------------------------------------------------------------
+% Complexity
+% -----------------------------------------------------------------------------
+\Complexity
+As per the problem statement we need to ensure that the time complexity is \textbf{O(n)}, and the extra space complexity is \textbf{O(1)}. let n be the number of elements in the input nums array. As we iterate over the array in a single pass, we maintain O(n) time complexity. As we create only a single answer variable and update it as we iterate we maintain the extra space complexity of O(1).
+
+% -----------------------------------------------------------------------------
+% Implementation
+% -----------------------------------------------------------------------------
+\bigskip
+\noindent\textbf{C++ Implementation}
+
+\lstinputlisting[
+  style=cpp,
+  caption={C++ Solution: Single Number}
+]{../problems/01-arrays-sequences/easy/lc-135-single-number/solution.cpp}
+
+\bigskip
+\noindent\textbf{Python Implementation}
+
+\lstinputlisting[
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  caption={Python Solution: Single Number}
+]{../problems/01-arrays-sequences/easy/lc-136-single-number/solution.py}
+
+\ProblemDivider
