@@ -1,0 +1,58 @@
+% STATUS: draft
+% PROMOTE: exemplars
+% TAGS: arrays
+% DIFFICULTY: easy
+% SOURCE: LeetCode 217
+
+\ProblemTitle{Contains Duplicate}
+\ProblemMeta{Easy}{Arrays, Hash Table, Sorting}{LC-217}
+\label{prob:lc-217-contains-duplicate}
+
+\ProblemSummary
+Given an integer array $nums$, return true if any value appears at least twice in the array, and return false if every element is distinct.
+
+\KeyIdea
+Iterate over the array, track and compare which integers have been seen before.
+
+\begin{Thinking}
+    The brute force method that I think of initially is create a new array, for every number I see in $nums$, check if it is in the new array, if not append it to the new array, then move to the next $nums[i]$. This results in having to iterate through two arrays for every iteration. 
+
+    We can make the above better by implementing a $hash table$ allowing for \(O(1)\) lookup of seen integers.
+\end{Thinking}
+
+\Algorithm
+\begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{12}
+  let hm be a hash_map
+
+  for num in nums:
+    if num in hm:
+      return true
+    else:
+      insert num into hm
+
+  return false
+\end{CodeBlock}
+
+\Correctness
+As we are iterating from the first element, to the final element of the array; for every iteration, we check if the integer is in the hash map and return true early before insertion. we know that all elements to the left of our index processed and can be certain have not appeared in the array as a duplicate.
+
+\Complexity
+The algorithm runs in \(O(n)\) time, where \(n\) is the number of digits in the input array. It has an auxiliary space complxity of \(O(1)\) 
+
+\bigskip
+\noindent\textbf{C++ Implementation}
+
+\lstinputlisting[
+  style=cpp,
+  caption={C++ Implementation}
+]{../problems/01-arrays-sequences/easy/lc-217-contains-duplicate/solution.cpp}
+
+\bigskip
+\noindent\textbf{Python Implementation}
+
+\lstinputlisting[
+  style=python,
+  caption={Python Implementation}
+]{../problems/01-arrays-sequences/easy/lc-217-contains-duplicate/solution.py}
+
+\ProblemDivider
