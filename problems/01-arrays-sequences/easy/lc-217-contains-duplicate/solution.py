@@ -1,6 +1,10 @@
+from typing import List
+
 class Solution:
-    def singleNumber(self, nums: List[int]) -> int:
-        ans = 0
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        seen = set()
         for x in nums:
-            ans = x ^ ans
-        return ans
+            if x in seen:
+                return True
+            seen.add(x)
+        return False
