@@ -1,9 +1,11 @@
 class Solution {
-  public:
-    int singleNumber(vector<int>& nums) {
-        int ans = 0;
-        // Perform bitwise XOR (ans XOR nums[i])
-        for(int x : nums) ans ^= x;           
-        return ans;
+public:
+    bool containsDuplicate(vector<int>& nums) {
+        std::unordered_set<int> seen;
+        for (int num : nums) {
+            // Insert returns a std::pair<iterator, bool> where .first is iterator
+            if (!seen.insert(num).second) return true;
+        }
+        return false;
     }
-}
+};
