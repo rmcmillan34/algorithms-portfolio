@@ -1,0 +1,78 @@
+% STATUS: draft | reviewed | final
+% PROMOTE: none
+% TAGS: arrays, hashing
+% DIFFICULTY: easy
+% SOURCE: LeetCode 001
+
+\ProblemTitle{Two Sum}
+\label{prob:lc-001-two-sum}
+
+\ProblemSummary
+Given an array of integers \(nums\) and an integer \(target\), return the \textit{indices} of the two numbers such that they add up to \(target\).
+
+You may assume that each input would have \textbf{exactly one solution}, and you may not use the same element twice. 
+
+You can return the answer in any order. 
+
+\KeyIdea
+We must find complementary numbers that sum to the given target integer. By using a hash table, we can store already-seen numbers and check if their complement (the difference between the target and the current number) has been encountered previously. This allows constant-time lookup for finding the solution.
+
+% -----------------------------------------------------------------------------
+% Optional: Author Thinking (excluded from exemplar builds)
+% -----------------------------------------------------------------------------
+\begin{Thinking}
+My initial thoughts for this problem included a brute-force solution iterating over the entire input array. For each integer (i) in the array we can compute the complement by $target - i = complement$ and then continue iterating over the array until we find a match noting there is exactly one solution. This would result in a time complexity of \(O(n^2)\). A better solution would be to iterate over the array once and use constant time lookup using a hash table.
+\end{Thinking}
+
+% -----------------------------------------------------------------------------
+% Algorithm
+% -----------------------------------------------------------------------------
+\Algorithm
+\begin{CodeBlock}[style=pseudo,caption={Pseudocode}]{<line count>}
+  hash_map<complement, index> hm;
+
+  for num in input:
+    complement = target - num
+    if not complement in hm:
+      hm[num] = index
+      return [index, hm[complement]]
+    else:
+      return [index, hm[complement]]
+\end{CodeBlock}
+
+% -----------------------------------------------------------------------------
+% Correctness
+% -----------------------------------------------------------------------------
+\Correctness
+We know that the algorithm is correct as we iterate over the input array and check if the complement exists in the hashmap for every iteration. The invariant that we maintain is that we know that every integer that has already been seen's complement does not yet exist in the hashmap. Given the problem statement condition that we can assume \textit{exactly one solution}, this allows us to return the answer immediately.
+
+% -----------------------------------------------------------------------------
+% Complexity
+% -----------------------------------------------------------------------------
+\Complexity
+let $n$ be the length of the input array. For the hash_map implementation we iterate over the input array a single time, and each access of the hash_map is a constant time operation. therefore, the time complexity of this algorithm is \(O(n)\). The auxiliary space complexity in the worst case i.e. where we find the complementary integer last means that we store all $n$ integers in the hash map, making the auxiliary space complexity is also \(O(n)\).
+
+% -----------------------------------------------------------------------------
+% Implementation
+% -----------------------------------------------------------------------------
+\bigskip
+\noindent\textbf{C++ Implementation}
+
+\lstinputlisting[
+  style=cpp,
+  caption={C++ Solution: Two Sum}
+]{../problems/01-arrays-sequences/easy/lc-001-two-sum/solution.cpp}
+
+\bigskip
+\noindent\textbf{Python Implementation}
+
+\lstinputlisting[
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  caption={Python Solution: Two Sum}
+]{../problems/01-arrays-sequences/easy/lc-001-two-sum/solution.py}
+
+\ProblemDivider
