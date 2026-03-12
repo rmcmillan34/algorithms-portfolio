@@ -1,0 +1,104 @@
+% STATUS: draft | reviewed | final
+% PROMOTE: none | exemplars | quant-prep
+% TAGS: arrays, hashing, dp, graphs, etc.
+% DIFFICULTY: easy | medium | hard
+% SOURCE: LeetCode XXX | Custom | Other
+
+\ProblemTitle{Top k Frequent Elements}
+\label{prob:lc-347-top-k-frequent-elements}
+
+\ProblemSummary
+Given an integer array \texttt{nums} and an integer \texttt{k}, return the \texttt{k} most frequent elements. The answer can be returned in any order.
+
+% -----------------------------------------------------------------------------
+% Optional: Author Thinking (excluded from exemplar builds)
+% -----------------------------------------------------------------------------
+\begin{Thinking}
+Initially, my approach involved counting the frequency of each element using a hashmap (or dictionary). For every number in the array, if it hasn’t been seen before, I would add it to the hashmap with a frequency of 1. Otherwise, I would increment its frequency count.
+
+Once the frequency count was complete, my next thought was to sort the hashmap by frequency and pick the top \texttt{k} most frequent elements. However, sorting the entire hashmap would take time proportional to the number of distinct elements, which might not be efficient enough for larger datasets.
+
+As an optimization, I realized that I could use a \textbf{min-heap} (priority queue) to maintain the top \texttt{k} most frequent elements efficiently. This would allow me to traverse the array just once, maintaining the heap dynamically as I go, rather than sorting the entire hashmap.
+\end{Thinking}
+
+\EdgeCases
+Some edge cases I considered:
+\begin{itemize}
+    \item If \texttt{k} is greater than the number of distinct elements in the input array.
+    \item If \texttt{k} is larger than the size of the array (though it's assumed that \texttt{k} will always be a valid input).
+\end{itemize}
+
+
+\KeyIdea
+The problem can be broken down into two main ideas:
+\begin{enumerate}
+    \item \textbf{Counting frequency}: We need to efficiently count how often each element appears in the input array.
+    \item \textbf{Extracting the k most frequent elements}: Once we have the frequency count, we need to efficiently select the \texttt{k} most frequent elements. This can be achieved using a \textbf{min-heap} to maintain the top \texttt{k} elements as we traverse the array.
+\end{enumerate}
+
+The \textbf{hash map} helps store frequency counts, and the \textbf{min-heap} allows for efficiently keeping track of the \texttt{k} most frequent elements with the least amount of computation.
+
+% -----------------------------------------------------------------------------
+% Algorithm
+% -----------------------------------------------------------------------------
+\Algorithm
+\begin{CodeBlock}[style=pseudo,caption={Pseudocode for Top K Frequent Elements}]{12}
+1. Count the frequency of each element in \texttt{nums}.
+2. Create a min-heap to store the \texttt{k} most frequent elements.
+3. For each element in the frequency map:
+    4. Insert the element into the heap.
+    5. If the heap size exceeds \texttt{k}, remove the element with the smallest frequency.
+6. Return the elements in the heap as the result.
+\end{CodeBlock}
+
+% -----------------------------------------------------------------------------
+% Correctness
+% -----------------------------------------------------------------------------
+\Correctness
+The algorithm is correct because:
+\begin{itemize}
+    \item We ensure every element is counted exactly once in the hashmap.
+    \item By maintaining a heap of size \texttt{k}, we guarantee that after processing all elements, the heap will contain only the top \texttt{k} most frequent elements.
+    \item The heap ensures that inserting and removing elements is done in logarithmic time, leading to efficient handling of the problem even with larger inputs.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+% Complexity
+% -----------------------------------------------------------------------------
+\Complexity
+\textbf{Time Complexity}: 
+\begin{itemize}
+    \item Counting frequencies takes \texttt{O(n)} time, where \texttt{n} is the size of the input array.
+    \item Each insertion into the heap takes \texttt{O(log k)}, and since there are \texttt{n} elements, the total heap operations take \texttt{O(n log k)}.
+    \item Therefore, the overall time complexity is \texttt{O(n log k)}.
+\end{itemize}
+
+\textbf{Space Complexity}: 
+\begin{itemize}
+    \item We store the frequencies of up to \texttt{n} elements in the hashmap, so the space complexity is \texttt{O(n)}.
+\end{itemize}
+
+% -----------------------------------------------------------------------------
+% Implementation
+% -----------------------------------------------------------------------------
+\bigskip
+\noindent\textbf{C++ Implementation}
+
+\lstinputlisting[
+  style=cpp,
+  caption={C++ Solution: Top k Frequent Elements}
+]{../problems/01-arrays-sequences/medium/lc-347-top-k-frequent-elements/solution.cpp}
+
+\bigskip
+\noindent\textbf{Python Implementation}
+
+\lstinputlisting[
+  language=Python,
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  frame=single,
+  breaklines=true,
+  caption={Python Solution: Top k Frequent Elements}
+]{../problems/01-arrays-sequences/medium/lc-347-top-k-frequent-elements/solution.py}
+
+\ProblemDivider
